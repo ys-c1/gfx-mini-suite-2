@@ -22,6 +22,22 @@ int main(void) {
     float cx, cy;
     sat_centroid(&a, &cx, &cy);
     CHECK(cx > 4.9f && cx < 5.1f && cy > 4.9f && cy < 5.1f);
+
+    /* regression pins for the pre-existing polygon routines: the
+     * circle/polygon work must not change them */
+    {
+        SatPoly c1 = box(10, 0, 5, 5), c2 = box(15, 0, 5, 5);
+        SatPoly far = box(15.5, 0, 2, 2);
+        CHECK(sat_overlap(&c1, &c2) == 1);      /* touching edges */
+        CHECK(sat_overlap(&c1, &far) == 0);
+        /* half-open boundary rule of sat_point_inside */
+        CHECK(sat_point_inside(&a, 0.0f, 0.0f) == 1);
+        CHECK(sat_point_inside(&a, 10.0f, 5.0f) == 0);
+        CHECK(sat_point_inside(&a, 5.0f, 10.0f) == 0);
+        CHECK(sat_overlap(NULL, &a) == -1);
+        CHECK(sat_overlap(&a, &b) == 1);
+    }
+
     printf("%d checks, %d failures\n", checks, fails);
     return fails ? 1 : 0;
 }
