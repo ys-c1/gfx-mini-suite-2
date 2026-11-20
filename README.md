@@ -4,7 +4,7 @@
 
 | 子项目 | 语言 | 内容 |
 |---|---|---|
-| projects/mini-sat-poly | C11 | 2D 多边形 SAT 相交与点内判定 |
+| projects/mini-sat-poly | C11 | 2D 多边形 SAT 相交、点内判定、最小平移向量与帧间推力平滑 |
 | projects/mini-gradient-map | C11 | Sobel 梯度幅值与边缘计数 |
 | projects/mini-chroma-planar | C11 | RGB 与 YUV420 平面互转 |
 | projects/mini-gain-stage | Python 3 | 静态增益与峰值均方根 |
